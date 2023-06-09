@@ -20,14 +20,14 @@ public class Frete extends Produto implements CalculoFrete {
             this.setPreco(this.getPreco() * 0.15);
         }
 
-        if (this.uf == UF_Enum.SP) {
+        if (this.uf == UF_Enum.MG) {
             this.setPreco(this.getPreco() * 0.3);
         }else{
             this.setPreco(this.getPreco() * 0.15);
         }
 
         if (this.uf == UF_Enum.RJ){
-        this.setPreco(this.getPreco() * 0.3);
+            this.setPreco(this.getPreco() * 0.3);
         }else{
             this.setPreco(this.getPreco() * 0.3);
         }
@@ -45,6 +45,7 @@ public class Frete extends Produto implements CalculoFrete {
             this.setPreco(this.getPreco() + 0);
         }
     }
+
 
     public void modelo_impressão_geral(){
 

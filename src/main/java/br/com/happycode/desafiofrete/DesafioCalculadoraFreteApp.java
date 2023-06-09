@@ -27,8 +27,8 @@ public class DesafioCalculadoraFreteApp {
             System.out.println("O valor do produto" + Bruno.getDescricao() + " está inválido pois deve ser maior que zero !");
         }
 
-        System.out.println(Bruno.uf);
         Bruno.modelo_impressão_geral();
+
 
     }
 

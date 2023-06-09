@@ -28,6 +28,19 @@ public class Cliente extends Frete{
         System.out.println(this.dia + "/" + mes + "/" + ano);
     }
 
+    private double FretePorValor(double valorProduto) {
+
+          if (getPreco() < 20.0) {
+              setPreco(getPreco() + 2);
+            } else if (getPreco() >= 20.0 && getPreco() <= 100.0) {
+              setPreco(getPreco() + 8);
+            } else {
+              setPreco(getPreco() + 0);
+            }
+        return getPreco();
+    }
+
+
     public String getCEP() {
         return CEP;
     }
