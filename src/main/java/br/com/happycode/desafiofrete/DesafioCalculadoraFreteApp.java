@@ -1,5 +1,7 @@
 package br.com.happycode.desafiofrete;
 
+import java.time.LocalDate;
+
 /**
  * Classe responsavel por inicializar a aplicação
  * */
@@ -7,29 +9,19 @@ public class DesafioCalculadoraFreteApp {
     public static void main(String[] args) {
         System.out.println("Iniciando...");
 
-        Cliente Bruno = new Cliente("07809000","Mesa",10d,"Bruno","Av. Prefeito Angelo Seleguin","Santista","Franco da Rocha", "SP");
+        Frete total;
 
-        int qtd = Bruno.getCEP().length();
+        Cliente c1 = new Cliente("Bruno","07809000","Av Angelo","Santista","Franco da Rocha", LocalDate.of(2000,02,03), Uf.SP);
+        Produto p1 = new Produto("Mesa",20d);
 
-        try{
-            if (qtd != 8) {
-                System.out.println("Cep invalido! o formato correto deveria ser XXXXXXXX");
-            }
-        } catch (IllegalArgumentException error){
-            System.out.println("Cep invalido! o formato correto deveria ser XXXXXXXX");
-        }
+        CalculoFrete calculoUf = new CalculoUf();
+        CalculoFrete calculoValor = new CalculoValorProduto();
 
-        try{
-            if (Bruno.getPreco() == 0d ) {
-                System.out.println("O valor do produto " + Bruno.getDescricao() + " está inválido pois deve ser maior que zero !");
-            }
-        } catch (NullPointerException error){
-            System.out.println("O valor do produto" + Bruno.getDescricao() + " está inválido pois deve ser maior que zero !");
-        }
+        Frete freteUf =  calculoUf.calcular(c1, p1);
+        freteUf.freteImppressao2();
 
-        Bruno.modelo_impressão_geral();
-
+        Frete freteValor = calculoValor.calcular(c1,p1);
+        freteValor.freteImpressao();
 
     }
-
 }

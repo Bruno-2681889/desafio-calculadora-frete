@@ -1,6 +1,6 @@
 package br.com.happycode.desafiofrete;
 
-public enum UF_Enum {
+public enum Uf {
 
     RO("Rondônia"),
     AC("Acre"),
@@ -30,13 +30,13 @@ public enum UF_Enum {
     GO("Goias"),
     DF("Distrito Federal");
 
-    private String UF;
+    private String uf;
 
-    UF_Enum(String UF) {
-        this.UF = UF;
+    Uf(String UF) {
+        this.uf = UF;
     }
 
-    public String getUF() {
-        return UF;
+    public String getUf() {
+        return uf;
     }
 }
