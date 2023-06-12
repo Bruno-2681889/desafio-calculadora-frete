@@ -21,6 +21,17 @@ public class Cliente{
         this.dataAniversario = dataAniversario;
         this.uf = uf;
 
+        if (cep == null) {
+            throw new NullPointerException(" Cep invalido ! o formato correto deveria ser XXXXXXXX");
+        }
+
+        if (cep.length() < 8 ){
+            throw new IllegalArgumentException (" Cep invalido ! o formato correto deveria ser XXXXXXXX");
+        }
+
+        if (cep.length() >= 9){
+            this.cep = cep.replaceAll("-","");
+        }
     }
 
     public Uf getUf() {
@@ -29,13 +40,10 @@ public class Cliente{
     }
 
     public String getCep() {
+
         return cep;
     }
 
-    public String getNome() {
-
-        return nome;
-    }
 
     public String getLogradouro() {
 

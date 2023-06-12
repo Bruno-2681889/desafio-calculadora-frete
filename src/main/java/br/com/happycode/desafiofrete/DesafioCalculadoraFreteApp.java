@@ -7,21 +7,31 @@ import java.time.LocalDate;
  * */
 public class DesafioCalculadoraFreteApp {
     public static void main(String[] args) {
+
         System.out.println("Iniciando...");
 
-        Frete total;
+        try {
+            Cliente c1 = new Cliente("Bruno", "07809-000", "Av Angelo", "Santista", "Franco da Rocha", LocalDate.of(2000, 02, 03), Uf.SP);
+            Produto p1 = new Produto("Mesa", null);
 
-        Cliente c1 = new Cliente("Bruno","07809000","Av Angelo","Santista","Franco da Rocha", LocalDate.of(2000,02,03), Uf.SP);
-        Produto p1 = new Produto("Mesa",20d);
+            CalculoFrete calculoUf = new CalculoUf();
+            CalculoFrete calculoValor = new CalculoValorProduto();
 
-        CalculoFrete calculoUf = new CalculoUf();
-        CalculoFrete calculoValor = new CalculoValorProduto();
+            Frete freteUf = calculoUf.calcular(c1, p1);
+            Frete freteValor = calculoValor.calcular(c1, p1);
 
-        Frete freteUf =  calculoUf.calcular(c1, p1);
-        freteUf.freteImppressao2();
+            Double valorFreteTotal = freteUf.getValorFrete() + freteValor.getValorFrete();
+            freteValor.freteImpressao();
+            System.out.println(valorFreteTotal);
 
-        Frete freteValor = calculoValor.calcular(c1,p1);
-        freteValor.freteImpressao();
+        } catch (NullPointerException e){
+            System.out.println(e.getMessage());
 
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+
+        } catch (PrecoInvalidoException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -16,14 +16,14 @@ public class Frete{
 
         System.out.println(descricao);
         System.out.println(uf);
-        System.out.println(valorFrete);
     }
 
     public void freteImppressao2 (){
 
         System.out.println(valorFrete);
-
     }
 
-
+    public Double getValorFrete() {
+        return valorFrete;
+    }
 }
