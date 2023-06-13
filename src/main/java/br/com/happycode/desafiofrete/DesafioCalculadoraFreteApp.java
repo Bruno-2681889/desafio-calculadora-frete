@@ -12,7 +12,7 @@ public class DesafioCalculadoraFreteApp {
 
         try {
             Cliente c1 = new Cliente("Bruno", "07809-000", "Av Angelo", "Santista", "Franco da Rocha", LocalDate.of(2000, 02, 03), Uf.SP);
-            Produto p1 = new Produto("Mesa", null);
+            Produto p1 = new Produto("Mesa", 1000d);
 
             CalculoFrete calculoUf = new CalculoUf();
             CalculoFrete calculoValor = new CalculoValorProduto();
