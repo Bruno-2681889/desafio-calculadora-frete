@@ -12,7 +12,7 @@ public class ProdutoTest {
         String mensagemErro="";
 
         try{
-            Produto p1 = new Produto("Mesa", null);
+            new Produto("Mesa", null);
 
         } catch (NullPointerException e) {
             mensagemErro = e.getMessage();
@@ -25,7 +25,7 @@ public class ProdutoTest {
         String mensagemErro = "";
 
         try {
-            Produto p1 = new Produto("Mesa", 0d);
+            new Produto("Mesa", 0d);
 
         } catch (PrecoInvalidoException e) {
             mensagemErro = e.getMessage();

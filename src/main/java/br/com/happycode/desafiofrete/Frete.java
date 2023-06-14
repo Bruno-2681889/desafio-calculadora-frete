@@ -24,6 +24,7 @@ public class Frete{
     }
 
     public Double getValorFrete() {
+
         return valorFrete;
     }
 }
