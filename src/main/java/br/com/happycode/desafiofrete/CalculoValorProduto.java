@@ -1,5 +1,7 @@
 package br.com.happycode.desafiofrete;
 
+import java.lang.ref.Cleaner;
+
 public class CalculoValorProduto implements CalculoFrete{
 
     @Override
@@ -11,6 +13,7 @@ public class CalculoValorProduto implements CalculoFrete{
         if (produto.getPreco() <= 100)
             return new Frete(produto.getDescricao(),8d,cliente.getUf());
 
-        return new Frete(produto.getDescricao(),0d, cliente.getUf());
+        return new Frete(produto.getDescricao(),0d,cliente.getUf());
     }
+
 }
