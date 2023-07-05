@@ -1,8 +1,5 @@
 package br.com.happycode.desafiofrete;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,12 +15,6 @@ public class ClienteDBFake {
         cliente.setId(id);
 
         tabelaClientes.add(cliente);
-    }
-
-    public String consomeApiDeCepsUsandoClientRestTemplate(String cep){
-        RestTemplate client = new RestTemplate();
-        ResponseEntity<String> response = client.getForEntity("https://viacep.com.br/ws/" + cep + "/json/", String.class);
-        return response.getBody();
     }
 
     public List<Cliente> retornaTodosClientes(){
@@ -65,12 +56,14 @@ public class ClienteDBFake {
 
             if (antigoCliente.getId().equals(clienteAtualizado.getId())) {
                 antigoCliente.setNome(clienteAtualizado.getNome());
-                antigoCliente.setCidade(clienteAtualizado.getCidade());
-                antigoCliente.setBairro(clienteAtualizado.getBairro());
-                antigoCliente.setCep(clienteAtualizado.getCep());
-                antigoCliente.setLogradouro(clienteAtualizado.getLogradouro());
+//                antigoCliente.setCidade(clienteAtualizado.getCidade());
+//                antigoCliente.setBairro(clienteAtualizado.getBairro());
+//                antigoCliente.setCep(clienteAtualizado.getCep());
+//                antigoCliente.setLogradouro(clienteAtualizado.getLogradouro());
                 break;
             }
+
+
         }
     }
 

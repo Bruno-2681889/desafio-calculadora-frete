@@ -1,8 +1,21 @@
 package br.com.happycode.desafiofrete;
 
+import br.com.happycode.desafiofrete.dto.ClienteDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.Data;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value ="/client")
@@ -12,29 +25,16 @@ public class ClientController {
     ClienteDBFake dbFake = new ClienteDBFake();
     RestTemplate restTemplate = new RestTemplate();
 
-//ClienteDBFake dbFake = new ClienteDBFake();
-//    @GetMapping("/{cep}")
-//    public Cliente consultaCep(@PathVariable("cep") String cep) {
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<Cliente> resp =
-//                restTemplate
-//                        .getForEntity(String.format("http//viacep.com.br/ws/%s/json/", cep), Cliente.class);
-//        return resp.getBody();
-//    }
-
-//    @GetMapping("/cep/{cep}")
-//
-//    public String getExternalData(@PathVariable String cep) {
-//      // consomeApiDeCepsUsandoClientJava11(cep);
-//      return dbFake.consomeApiDeCepsUsandoClientRestTemplate(cep);
-//    }
-
-
     @GetMapping("/cep/{cep}")
+    public Endereco consultaCepEndereco(@PathVariable String cep) {
 
-    public String getExternalData(@PathVariable String cep) {
-        // consomeApiDeCepsUsandoClientJava11(cep);
-        return dbFake.consomeApiDeCepsUsandoClientRestTemplate(cep);
+        return consomeApiCeps(cep);
+    }
+
+    public Endereco consomeApiCeps(String cep){
+        RestTemplate endereco = new RestTemplate();
+        ResponseEntity<Endereco> response = endereco.getForEntity("https://viacep.com.br/ws/" + cep + "/json/", Endereco.class);
+        return response.getBody();
     }
 
     @GetMapping
@@ -50,9 +50,16 @@ public class ClientController {
     }
 
     @PostMapping
-    public void save(@RequestBody Cliente cliente){
+    public void save(@RequestBody ClienteDto clienteDto){
+        Cep.validar(clienteDto.getCep());
 
-        dbFake.save(cliente);
+        LocalDate dataAniversario = clienteDto.getAniversario();
+
+        Endereco endereco = consomeApiCeps(clienteDto.getCep());
+
+        Cliente novoCliente = new Cliente(clienteDto.getNome(), dataAniversario, endereco);
+
+        dbFake.save(novoCliente);
     }
 
     @DeleteMapping("/{id}")
@@ -73,4 +80,5 @@ public class ClientController {
 
        return dbFake.clientePorId(id);
     }
+
 }

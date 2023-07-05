@@ -10,13 +10,13 @@ public class CalculoUfTest {
     @Test
     public void deve_calcular_o_valor_do_frete_em_trinta_porcento_quando_uf_for_sp(){
 
-        Cliente c1 = new Cliente("Bruno", "07809-000", "Av Angelo", "Santista", "Franco da Rocha", LocalDate.of(2000, 02, 03), Uf.SP);
+        Endereco e1 = new Endereco(null ,"Angelo Celeguin","Santista","Franco da Rocha", Uf.SP, "0022");
 
         Produto p1 = new Produto("Mesa", 10d);
 
         CalculoUf calculoUf = new CalculoUf();
 
-        Frete frete = calculoUf.calcular(c1,p1);
+        Frete frete = calculoUf.calcularEndereco(e1,p1);
 
         Assertions.assertEquals(3,frete.getValorFrete().doubleValue());
 
@@ -25,13 +25,13 @@ public class CalculoUfTest {
     @Test
     public void deve_calcular_o_valor_do_frete_em_trinta_porcento_quando_uf_for_mg(){
 
-        Cliente c1 = new Cliente("Bruno", "07809-000", "Av Angelo", "Santista", "Franco da Rocha", LocalDate.of(2000, 02, 03), Uf.MG);
+        Endereco e1 = new Endereco(null ,"Angelo Celeguin","Santista","Franco da Rocha", Uf.MG, "0022");
 
         Produto p1 = new Produto("Mesa", 10d);
 
         CalculoUf calculoUf = new CalculoUf();
 
-        Frete frete = calculoUf.calcular(c1,p1);
+        Frete frete = calculoUf.calcularEndereco(e1,p1);
 
         Assertions.assertEquals(3,frete.getValorFrete().doubleValue());
 
@@ -40,13 +40,13 @@ public class CalculoUfTest {
     @Test
     public void deve_calcular_o_valor_do_frete_em_trinta_porcento_quando_uf_for_rj(){
 
-        Cliente c1 = new Cliente("Bruno", "07809-000", "Av Angelo", "Santista", "Franco da Rocha", LocalDate.of(2000, 02, 03), Uf.RJ);
+        Endereco e1 = new Endereco(null ,"Angelo Celeguin","Santista","Franco da Rocha", Uf.RJ, "0022");
 
         Produto p1 = new Produto("Mesa", 10d);
 
         CalculoUf calculoUf = new CalculoUf();
 
-        Frete frete = calculoUf.calcular(c1,p1);
+        Frete frete = calculoUf.calcularEndereco(e1,p1);
 
         Assertions.assertEquals(3,frete.getValorFrete().doubleValue());
 
@@ -55,13 +55,13 @@ public class CalculoUfTest {
     @Test
     public void deve_calcular_o_valor_do_frete_em_quinze_porcento_quando_uf_nao_for_sp_mg_rj(){
 
-        Cliente c1 = new Cliente("Bruno", "07809-000", "Av Angelo", "Santista", "Franco da Rocha", LocalDate.of(2000, 02, 03), Uf.AL);
+        Endereco e1 = new Endereco(null ,"Angelo Celeguin","Santista","Franco da Rocha", Uf.AM, "0022");
 
         Produto p1 = new Produto("Mesa", 10d);
 
         CalculoUf calculoUf = new CalculoUf();
 
-        Frete frete = calculoUf.calcular(c1,p1);
+        Frete frete = calculoUf.calcularEndereco(e1,p1);
 
         Assertions.assertEquals(1.5,frete.getValorFrete().doubleValue());
 
