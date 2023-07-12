@@ -1,10 +1,13 @@
 package br.com.happycode.desafiofrete;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public class ClienteDBFake {
 
     private static List<Cliente> tabelaClientes = new ArrayList();
@@ -56,14 +59,8 @@ public class ClienteDBFake {
 
             if (antigoCliente.getId().equals(clienteAtualizado.getId())) {
                 antigoCliente.setNome(clienteAtualizado.getNome());
-//                antigoCliente.setCidade(clienteAtualizado.getCidade());
-//                antigoCliente.setBairro(clienteAtualizado.getBairro());
-//                antigoCliente.setCep(clienteAtualizado.getCep());
-//                antigoCliente.setLogradouro(clienteAtualizado.getLogradouro());
                 break;
             }
-
-
         }
     }
 
@@ -79,6 +76,4 @@ public class ClienteDBFake {
         }
         return clientesEncontrado;
     }
-
-
 }

@@ -1,7 +1,5 @@
 package br.com.happycode.desafiofrete;
 
-import br.com.happycode.desafiofrete.dto.ClienteDto;
-
 import java.time.LocalDate;
 
 public class Cliente implements Comparable<Cliente>{

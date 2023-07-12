@@ -1,10 +1,14 @@
 package br.com.happycode.desafiofrete.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class ClienteDto {
 
+    @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDate aniversario;
+
     private String cep;
     private String nome;
 
@@ -17,5 +21,6 @@ public class ClienteDto {
     }
 
     public LocalDate getAniversario() {return aniversario; }
+
 
 }

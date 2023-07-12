@@ -1,84 +1,53 @@
 package br.com.happycode.desafiofrete;
 
 import br.com.happycode.desafiofrete.dto.ClienteDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.Data;
-import org.springframework.http.ResponseEntity;
+import br.com.happycode.desafiofrete.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value ="/client")
 
 public class ClientController {
 
-    ClienteDBFake dbFake = new ClienteDBFake();
-    RestTemplate restTemplate = new RestTemplate();
+    private ClienteService clienteService;
 
-    @GetMapping("/cep/{cep}")
-    public Endereco consultaCepEndereco(@PathVariable String cep) {
-
-        return consomeApiCeps(cep);
+    public ClientController(ClienteService clienteService) {
+        this.clienteService = clienteService;
     }
 
-    public Endereco consomeApiCeps(String cep){
-        RestTemplate endereco = new RestTemplate();
-        ResponseEntity<Endereco> response = endereco.getForEntity("https://viacep.com.br/ws/" + cep + "/json/", Endereco.class);
-        return response.getBody();
+    @PostMapping
+    public void save(@RequestBody ClienteDto clienteDto){
+        clienteService.save(clienteDto);
     }
 
     @GetMapping
     public List<Cliente> retornaTodosCliente(){
 
-        return dbFake.retornaTodosClientes();
+        return clienteService.retornaTodosCliente();
     }
 
     @GetMapping (value ="/classificar")
     public List<Cliente> retornaTodosClientesClassificados(){
 
-        return dbFake.retornaTodosClientesClassificados();
-    }
-
-    @PostMapping
-    public void save(@RequestBody ClienteDto clienteDto){
-        Cep.validar(clienteDto.getCep());
-
-        LocalDate dataAniversario = clienteDto.getAniversario();
-
-        Endereco endereco = consomeApiCeps(clienteDto.getCep());
-
-        Cliente novoCliente = new Cliente(clienteDto.getNome(), dataAniversario, endereco);
-
-        dbFake.save(novoCliente);
+        return clienteService.retornaTodosClientesClassificados();
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id){
-
-        dbFake.delete(id);
+        clienteService.delete(id);
     }
 
     @PutMapping("/{id}")
     public void atualizar(@PathVariable String id,@RequestBody Cliente cliente) {
-
         cliente.setId(id);
-        dbFake.atualizar(cliente);
+        clienteService.atualizar(cliente);
     }
 
     @GetMapping("/{id}")
     public List<Cliente> retornaPorId(@PathVariable String id){
 
-       return dbFake.clientePorId(id);
+        return clienteService.retornaPorId(id);
     }
-
 }
