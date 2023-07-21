@@ -2,19 +2,25 @@ package br.com.happycode.desafiofrete.service;
 
 import br.com.happycode.desafiofrete.*;
 import br.com.happycode.desafiofrete.dto.ClienteDto;
+import ch.qos.logback.core.net.server.Client;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
 
-    private ClienteDBFake dbFake;
+    private ClienteRepository clienteRepository;
     private CepService cepService;
 
-    public ClienteService(ClienteDBFake dbFake, CepService cepService) {
-        this.dbFake = dbFake;
+    @Autowired
+    public ClienteService(ClienteRepository clienteRepository, CepService cepService) {
+        this.clienteRepository = clienteRepository;
         this.cepService = cepService ;
     }
 
@@ -27,30 +33,37 @@ public class ClienteService {
 
         Cliente novoCliente = new Cliente(clienteDto.getNome(), dataAniversario, endereco);
 
-        dbFake.save(novoCliente);
+        clienteRepository.save(novoCliente);
     }
 
     public List<Cliente> retornaTodosCliente(){
 
-        return dbFake.retornaTodosClientes();
+        return clienteRepository.findAll();
     }
 
     public List<Cliente> retornaTodosClientesClassificados(){
 
-        return dbFake.retornaTodosClientesClassificados();
+        List<Cliente> cliente = clienteRepository.findAll();
+        Collections.sort(cliente);
+
+     return cliente;
+        // Sort sort = Sort.by(Sort.Direction.ASC, "nome");
+        // return clienteRepository.findAll();
     }
 
     public void delete(String id){
-        dbFake.delete(id);
+        clienteRepository.deleteById(id);
     }
 
+    //Lição de casa
     public void atualizar(Cliente cliente) {
 
-        dbFake.atualizar(cliente);
+
+       clienteRepository.save(cliente);
     }
 
-    public List<Cliente> retornaPorId(String id){
-
-        return dbFake.clientePorId(id);
+    public Cliente retornaPorId(String id){
+        Optional<Cliente> clienteOpcional = clienteRepository.findById(id);
+        return clienteOpcional.get();
     }
 }

@@ -1,5 +1,6 @@
-package br.com.happycode.desafiofrete;
+package br.com.happycode.desafiofrete.service;
 
+import br.com.happycode.desafiofrete.Endereco;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,5 @@ public class CepService {
         ResponseEntity<Endereco> response = restTemplate.getForEntity(url + cep + "/json/", Endereco.class);
         return response.getBody();
     }
+
 }

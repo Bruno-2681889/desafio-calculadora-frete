@@ -1,11 +1,16 @@
 package br.com.happycode.desafiofrete;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
+@Document("clientes")
 public class Cliente implements Comparable<Cliente>{
 
     private String nome;
     private LocalDate dataAniversario;
+
+@Id
     private String id;
     private Endereco endereco;
 
@@ -14,7 +19,6 @@ public class Cliente implements Comparable<Cliente>{
         this.nome = nome;
         this.dataAniversario = dataAniversario;
         this.endereco = endereco;
-
     }
 
     public String getId() {
